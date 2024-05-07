@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IIPC Calculator for Industry/Organization">
+    <title>IIPC Calculator</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        h1, h3 {
+            font-size: 28px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-label {
+            font-weight: bold;
+            color: #501b1d;
+        }
+        .btn-submit {
+            background-color: #501b1d;
+            color: #fff;
+            border: none;
+        }
+        .btn-submit:hover {
+            background-color: #3c1416;
+        }
+        .text-primary {
+            color: #0d6efd;
+        }
+        .text-success {
+            color: #501b1d;
+        }
+        .text-dark {
+            color: #212529;
+        }
+        .bill-section {
+            background-color: #edf5e1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .accent-color {
+            color: #85dcb;   
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <h1 class="mb-5">IIPC CALCULATOR</h1>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form id="iipcForm">
+                            <div class="mb-3">
+                                <label for="nameoforg" class="form-label">Name of the Industry/Organization</label>
+                                <input type="text" class="form-control" id="nameoforg" name="nameoforg" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nature of Consultancy</label><br>
+                                <input type="radio" id="test" name="nature" value="Testing" required>
+                                <label for="test">Testing</label>
+                                <input type="radio" id="train" name="nature" value="Training">
+                                <label for="train">Training</label>
+                                <input type="radio" id="consult" name="nature" value="Consultancy">
+                                <label for="consult">Consultancy</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amo" class="form-label">Amount</label>
+                                <input type="number" class="form-control" id="amo" name="amo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nooffaculty" class="form-label">Number of faculty</label>
+                                <select id="sel" class="form-select" name="fac">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-submit" onclick="calculate()">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <h3 class="mb-4 accent-color">Your Bill</h3>
+                </div>
+                <div id="billDetails" class="bill-section d-none">
+                    <p id="c1"></p>
+                    <p id="option"></p>
+                    <p id="c2"></p>
+                    <p id="c3"></p>
+                    <p id="c4"></p>
+                    <p id="c5"></p>
+                    <p id="c6"></p>
+                    <p id="c7"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            var name = document.getElementById("nameoforg").value;
+            var amount = parseFloat(document.getElementById("amo").value);
+            var facultyCount = parseInt(document.getElementById("sel").value);
+            var nature;
+
+            var radioButtons = document.getElementsByName("nature");
+            for (let radio of radioButtons) {
+                if (radio.checked) {
+                    nature = radio.value;
+                    break;
+                }
+            }
+
+            var gst = parseFloat(amount * 0.18);
+            var totalAmount = parseFloat(amount + gst);
+            var collegeAmount = parseFloat(amount * 0.3);
+            var facultyAmount = parseFloat(amount * 0.7);
+            var amountPerFaculty = parseFloat(facultyAmount / facultyCount);
+
+            document.getElementById("billDetails").classList.remove("d-none");
+            document.getElementById("c1").innerHTML = "Name of the Industry: " + name;
+            document.getElementById("option").innerHTML = "Nature of Consultancy is " + nature;
+            document.getElementById("c2").innerHTML = "Amount: " + amount.toFixed(2);
+            document.getElementById("c3").innerHTML = "Including GST: " + totalAmount.toFixed(2);
+            document.getElementById("c4").innerHTML = "Amount going for the college: " + collegeAmount.toFixed(2);
+            document.getElementById("c5").innerHTML = "Amount going for the faculty: " + facultyAmount.toFixed(2);
+            document.getElementById("c6").innerHTML = "Number of faculty: " + facultyCount;
+            document.getElementById("c7").innerHTML = "Amount per faculty: " + amountPerFaculty.toFixed(2);
+        }
+    </script>
+</body>
+</html>
