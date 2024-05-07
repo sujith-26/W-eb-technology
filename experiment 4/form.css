@@ -1,0 +1,62 @@
+
+#form{
+    width: 400px;
+    margin: 10% auto 0 auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+h1{
+    text-align: center;
+    color: rgb(231, 9, 53);
+    font-family: 'Times New Roman', Times, serif;
+}
+#form button{
+    background-color: rgb(69, 83, 241);
+    color: white;
+    border: 02px solid rgb(3, 3, 3);
+    padding: 05px;
+    margin: 20px 0px;
+    border-radius: 05px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+.input-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.input-groups{
+    margin-bottom: 10px;
+}
+.input-group input{
+    border-radius: 05px;
+    font-size: 15px;
+    margin-top: 05px;
+    padding: 05px;
+    border: solid rgb(138, 177, 180);
+    font-family: 'Times New Roman', Times, serif;
+}
+.input-group input:focus{
+    outline: 0;
+
+}
+.error{
+    color: red;
+    font-size: 15px;
+    margin-top: 05px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.input-group.error input{
+    border-color: red;
+    font-family: 'Times New Roman', Times, serif;
+}
+.emi{
+    border:2px solid rgb(138, 177, 180);
+    padding: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}

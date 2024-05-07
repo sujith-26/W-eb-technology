@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration Form</title>
+<style>
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url('background.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+h2 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+}
+
+.checkbox-label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+span.error {
+    display: block;
+    margin-top: 5px;
+}
+</style>
+</head>
+<body>
+<h2>Student Registration Form</h2>
+<form id="registrationForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" oninput="validateName()"><br>
+    <span id="name-error" class="error"></span><br>
+
+    <label for="rollNo">Roll No:</label><br>
+    <input type="text" id="rollNo" name="rollNo" oninput="validateRollNo()"><br>
+    <span id="rollNo-error" class="error"></span><br>
+
+    <label for="gender">Gender:</label><br>
+    <select id="gender" name="gender" onchange="validateGender()">
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select><br>
+    <span id="gender-error" class="error"></span><br>
+
+    <label for="mobile">Mobile Number:</label><br>
+    <input type="text" id="mobile" name="mobile" oninput="validateMobile()"><br>
+    <span id="mobile-error" class="error"></span><br>
+
+    <label for="email">Email Address:</label><br>
+    <input type="email" id="email" name="email" oninput="validateEmail()"><br>
+    <span id="email-error" class="error"></span><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" oninput="validatePassword()"><br>
+    <span id="password-error" class="error"></span><br>
+
+    <label for="interest">Area of Interest:</label><br>
+    <select id="interest" name="interest" onchange="validateInterest()">
+        <option value="">Select Area of Interest</option>
+        <option value="os">Operating Systems (OS)</option>
+        <option value="dbms">Database Management Systems (DBMS)</option>
+        <option value="wt">Web Technologies (WT)</option>
+        <option value="ds">Data Structures (DS)</option>
+    </select><br>
+    <span id="interest-error" class="error"></span><br>
+
+    <label>Programming Languages Known:</label><br>
+    <input type="checkbox" id="java" name="languages" value="java" onchange="validateLanguages()">
+    <label for="java" class="checkbox-label">Java</label><br>
+    <input type="checkbox" id="python" name="languages" value="python" onchange="validateLanguages()">
+    <label for="python" class="checkbox-label">Python</label><br>
+    <input type="checkbox" id="javascript" name="languages" value="javascript" onchange="validateLanguages()">
+    <label for="javascript" class="checkbox-label">JavaScript</label><br>
+    <span id="languages-error" class="error"></span><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<div id="submitted-message" style="display: none;">Form Submitted!</div>
+
+<script>
+function validateName() {
+    var name = document.getElementById('name').value;
+    var nameRegex = /^[a-zA-Z]+$/;
+
+    if (!name.match(nameRegex)) {
+        document.getElementById('name-error').innerHTML = "Name can only contain letters and no special symbols.";
+    } else {
+        document.getElementById('name-error').innerHTML = "";
+    }
+}
+
+function validateRollNo() {
+    var rollNo = document.getElementById('rollNo').value;
+    var rollNoRegex = /^\d{2}[a-zA-Z]{3}\d{3}$/;
+
+    if (!rollNo.match(rollNoRegex)) {
+        document.getElementById('rollNo-error').innerHTML = "Roll No format should be 2 digits followed by 3 letters and 3 digits.";
+    } else {
+        document.getElementById('rollNo-error').innerHTML = "";
+    }
+}
+
+function validateGender() {
+    var gender = document.getElementById('gender').value;
+
+    if (gender === "") {
+        document.getElementById('gender-error').innerHTML = "Please select gender.";
+    } else {
+        document.getElementById('gender-error').innerHTML = "";
+    }
+} 
+
+function validateMobile() {
+    var mobile = document.getElementById('mobile').value;
+    var mobileRegex = /^[6-9]\d{9}$/;
+
+    if (!mobile.match(mobileRegex)) {
+        document.getElementById('mobile-error').innerHTML = "Mobile number should be 10 digits starting with 6-9.";
+    } else {
+        document.getElementById('mobile-error').innerHTML = "";
+    }
+}
+
+function validateEmail() {
+    var email = document.getElementById('email').value;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email.match(emailRegex)) {
+        document.getElementById('email-error').innerHTML = "Please enter a valid email address.";
+    } else if (!(email.endsWith("@kongu.edu") || email.endsWith("@gmail.com"))) {
+        document.getElementById('email-error').innerHTML = "Email should be from Kongu University domain or Gmail domain.";
+    } else {
+        document.getElementById('email-error').innerHTML = "";
+    }
+}
+
+
+function validatePassword() {
+    var password = document.getElementById('password').value;
+    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/;
+
+    if (!password.match(passwordRegex)) {
+        document.getElementById('password-error').innerHTML = "Password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 8 characters long.";
+    } else {
+        document.getElementById('password-error').innerHTML = "";
+    }
+} 
+
+function validateInterest() {
+    var interest = document.getElementById('interest').value;
+
+    if (interest === "") {
+        document.getElementById('interest-error').innerHTML = "Please select area of interest.";
+    } else {
+        document.getElementById('interest-error').innerHTML = "";
+    }
+}
+
+function validateLanguages() {
+    var languages = document.querySelectorAll('input[name="languages"]:checked').length;
+
+    if (languages === 0) {
+        document.getElementById('languages-error').innerHTML = "Please select at least one programming language known.";
+    } else {
+        document.getElementById('languages-error').innerHTML = "";
+    }
+}
+
+function validateForm() {
+    validateName();
+    validateRollNo();
+    validateGender();
+    validateMobile();
+    validateEmail();
+    validatePassword();
+    validateInterest();
+    validateLanguages();
+
+    if (document.querySelectorAll('.error').length > 0) {
+        return false; 
+    }
+
+    
+    document.getElementById('submitted-message').style.display = 'block';
+
+    return true;
+}
+</script>
+</body>
+</html>
