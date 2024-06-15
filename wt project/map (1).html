@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geofencing with Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+    <div id="map"></div>
+    <style>
+        #map { height: 750px;width: auto; }
+    </style>
+
+
+<script>
+    var map = L.map('map');
+    map.setView([12.9528, 80.1417], 15); // Set the initial view to Chrompet
+
+    // Define the coordinates of Chrompet
+    var chrompetCoords = [12.9528, 80.1417];
+
+    // Create a circle representing the geofence with a radius of 2000 meters (2 times bigger)
+    var geofence = L.circle(chrompetCoords, {
+        color: 'blue',
+        fillColor: 'blue',
+        fillOpacity: 0.2,
+        radius: 2000 // 2km in meters
+    }).addTo(map);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    navigator.geolocation.watchPosition(success, error);
+
+    let marker, circle, zoomed;
+
+    function success(pos) {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const accuracy = pos.coords.accuracy;
+
+        if (marker) {
+            map.removeLayer(marker);
+            map.removeLayer(circle);
+        }
+        marker = L.marker([lat, lng]).addTo(map);
+        circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
+
+        if (!zoomed) {
+            zoomed = map.fitBounds(circle.getBounds());
+        }
+
+        // Check if user is inside geofence
+        if (geofence.getBounds().contains([lat, lng])) {
+            alert("You are inside the geofence!");
+        }
+    }
+
+    function error(err) {
+        if (err.code === 1) {
+            alert("Allow location access !!!");
+        } else {
+            alert("Can't fetch");
+        }
+    }
+</script>
+</body>
+</html>
