@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .container {
+            margin-top: 50px; /* Add space from the top */
+        }
+        .card {
+            background-color: #fff; /* White background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+        }
+        .card-header {
+            background-color: #6c757d; /* Dark gray header */
+            color: #fff; /* White text */
+            border-bottom: none; /* No border at the bottom of the header */
+        }
+        .form-label {
+            color: #495057; /* Dark text for labels */
+        }
+        .form-control {
+            border: 1px solid #ced4da; /* Light gray border */
+            border-radius: 5px; /* Rounded input fields */
+        }
+        .form-check-input {
+            margin-right: 5px; /* Space between radio buttons and labels */
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Red submit button */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+        }
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1 class="mb-0">STUDENTS DETAILS FORM</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="http://localhost:9000/action" method="post">
+                            <div class="form-group">
+                                <label class="form-label" for="action">Action:</label>
+                                <select class="form-control" id="action" name="action" required>
+                                    <option value="insert">Insert</option>
+                                    <option value="delete">Delete</option>
+                                    <option value="update">Update</option>
+                                    <option value="show-all">Show All Details</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="name">Student Name:</label>
+                                <input class="form-control" type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="id">ID:</label>
+                                <input class="form-control" type="text" id="id" name="id" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Gender:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="gender-male" name="gender" value="Male" required>
+                                    <label class="form-check-label" for="gender-male">Male</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="gender-female" name="gender" value="Female" required>
+                                    <label class="form-check-label" for="gender-female">Female</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="branch">Branch:</label>
+                                <select class="form-control" id="branch" name="branch" required>
+                                    <option value=""></option>
+                                    <option value="CSE">CSE</option>
+                                    <option value="IT">IT</option>
+                                    <option value="ECE">ECE</option>
+                                    <option value="CSD">CSD</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="mobileno">Mobile Number:</label>
+                                <input class="form-control" type="tel" id="mobileno" name="mobileno" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="address">Address:</label>
+                                <textarea class="form-control" id="address" name="address" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-danger">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
