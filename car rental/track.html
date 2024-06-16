@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .track-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px;
+            text-transform: uppercase;
+        }
+
+        .track-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Track Cycle</h1>
+        <nav>
+            <ul>
+                <li><a href="admin.html"><u>Logout</u></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <button class="track-button" onclick="trackCycle('Mountain Bike')">Cycle model 1</button><br>
+        <button class="track-button" onclick="trackCycle('Road Bike')">Cycle model 2</button><br>
+        <button class="track-button" onclick="trackCycle('City Bike')">Cycle model 3</button>
+    </main>
+
+    <script>
+        function trackCycle(model) {
+            // Redirect to the track cycle page with model information
+            window.location.href = "map.html?model=" + model;
+        }
+    </script>
+</body>
+</html>
